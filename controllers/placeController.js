@@ -46,7 +46,7 @@ async function searchPlaces(request, response) {
         }
 
         const results = await places.find({
-            name: { $regex: pname, $options: "i" }
+            name: { $regex: pname.trim(), $options: "i" }
         }).toArray();
 
         response.json(results);
