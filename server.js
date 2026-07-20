@@ -1,22 +1,33 @@
 require('dotenv').config();
 const PORT = process.env.PORT || 7000;
 const express = require('express');
-const app = express();
 const cors = require('cors');
+const session = require('express-session');
 const { main } = require('./config/db');
 const placeRoutes = require('./routes/placeRoutes');
-app.use(cors());
+const userRoutes = require('./routes/userRoutes');
+const app = express();
+
+app.use(cors({
+    origin: "https://ghumo-ji-cnfv.vercel.app/", 
+    credentials: true
+}));
 app.use(express.json());
 
+app.use(session({
+    secret: "1234",
+    resave: false,
+    saveUninitialized: false
+}));
 
 async function start() {
     await main();
-    app.use('/api/places',placeRoutes); 
+    app.use('/api/places', placeRoutes);
+    app.use('/api/users', userRoutes);
+
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
     });
-
-    
 }
 
 start();
