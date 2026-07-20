@@ -9,22 +9,15 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:3000", "https://ghumo-ji-cnfv.vercel.app"],
+    origin: "https://ghumo-ji-cnfv.vercel.app/", 
     credentials: true
 }));
 app.use(express.json());
-app.set("trust proxy", 1);
 
 app.use(session({
     secret: "1234",
     resave: false,
-    saveUninitialized: false,
-
-    cookie: {
-        secure: true,
-        sameSite: "none",
-        maxAge: 1000 * 60 * 60 * 24
-    }
+    saveUninitialized: false
 }));
 
 async function start() {
