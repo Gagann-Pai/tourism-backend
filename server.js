@@ -9,7 +9,7 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 app.use(cors({
-    origin: "https://ghumo-ji-cnfv.vercel.app/", 
+    origin: ["http://localhost:3000", "https://ghumo-ji-cnfv.vercel.app"], 
     credentials: true
 }));
 app.use(express.json());
