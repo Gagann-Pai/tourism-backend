@@ -13,11 +13,18 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json());
+app.set("trust proxy", 1);
 
 app.use(session({
     secret: "1234",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+
+    cookie: {
+        secure: true,
+        sameSite: "none",
+        maxAge: 1000 * 60 * 60 * 24
+    }
 }));
 
 async function start() {
